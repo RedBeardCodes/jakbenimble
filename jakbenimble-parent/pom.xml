@@ -27,7 +27,8 @@
         <!-- Dependencies -->
         <jakarta.version>11.0.0</jakarta.version>
         <weld.version>6.0.4.Final</weld.version>
-        <undertow.version>2.4.0.Final</undertow.version>
+        <undertow.version>2.3.24.Final</undertow.version>
+        <resteasy.version>7.0.2.Final</resteasy.version>
         <hikari.version>7.0.2</hikari.version>
     </properties>
 
@@ -39,6 +40,7 @@
                 <artifactId>jakbenimble-core</artifactId>
                 <version>${jbn.version}</version>
             </dependency>
+
             <!-- Jakarta -->
             <dependency>
                 <groupId>jakarta.platform</groupId>
@@ -51,6 +53,12 @@
                 <groupId>org.jboss.weld.se</groupId>
                 <artifactId>weld-se-core</artifactId>
                 <version>${weld.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.jboss.logging</groupId>
+                        <artifactId>jboss-logging</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- Undertow -->
@@ -58,6 +66,33 @@
                 <groupId>io.undertow</groupId>
                 <artifactId>undertow-core</artifactId>
                 <version>${undertow.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+                <version>3.6.1.Final</version>
+            </dependency>
+
+            <!--
+            <dependency>
+                <groupId>io.undertow</groupId>
+                <artifactId>undertow-servlet</artifactId>
+                <version>${undertow.version}</version>
+            </dependency>
+            -->
+
+            <!-- RESTEasy -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-undertow</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-cdi</artifactId>
+                <version>${resteasy.version}</version>
             </dependency>
 
             <!-- JDBC / Pooling -->
