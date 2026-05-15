@@ -52,7 +52,7 @@ public final class JakBeNimble {
 		BeanManager beanManager = container.getBeanManager();
 		Set<Bean<?>> beans = beanManager.getBeans(Object.class);
 		for (Bean<?> bean : beans) {
-			System.out.println("Looking at bean: " + bean.getBeanClass().getName());
+			logger.debug("Looking at bean: " + bean.getBeanClass().getName());
 			Class<?> beanClass = bean.getBeanClass();
 			if (beanClass.isAnnotationPresent(Path.class)) {
 				logger.debug("Found resource: " + beanClass.getName());
