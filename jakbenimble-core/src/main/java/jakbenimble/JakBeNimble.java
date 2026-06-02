@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import io.undertow.Undertow;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
+import jakbenimble.cdi.RestDiscoveryExtension;
 
 public final class JakBeNimble {
 
@@ -28,10 +29,10 @@ public final class JakBeNimble {
 		server = new UndertowJaxrsServer();
 		server.start(Undertow.builder().addHttpListener(config.port(), config.host()));
 		ResteasyDeployment deployment = new ResteasyDeploymentImpl();
-		ResourceScanner scanner = new ResourceScanner();
-		ScanResult results = scanner.register(container);
-		deployment.getActualResourceClasses().addAll(results.resources());
-		deployment.getActualProviderClasses().addAll(results.providers());
+
+		RestDiscoveryExtension ext = container.getBeanManager().getExtension(RestDiscoveryExtension.class);
+		deployment.getActualResourceClasses().addAll(ext.getResources());
+		deployment.getActualProviderClasses().addAll(ext.getProviders());
 		server.deploy(deployment);
 
 		return this;
