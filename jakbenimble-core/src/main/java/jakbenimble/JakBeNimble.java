@@ -20,7 +20,6 @@ public final class JakBeNimble {
 
 	private SeContainer container;
 	private UndertowJaxrsServer server;
-	private boolean noHttp = false;
 
 	private static final Logger logger = LoggerFactory.getLogger(JakBeNimble.class);
 
@@ -28,22 +27,15 @@ public final class JakBeNimble {
 		return new JakBeNimble().doStart();
 	}
 
-	public JakBeNimble noHttp() {
-		noHttp = true;
-		return this;
-	}
-
 	private JakBeNimble doStart() {
 		container = SeContainerInitializer.newInstance().initialize();
 
-		if (!this.noHttp) {
-			logger.debug("Setting up undertow and resteasy...");
-			server = new UndertowJaxrsServer();
-			server.start(Undertow.builder().addHttpListener(8080, "localhost"));
-			ResteasyDeployment deployment = new ResteasyDeploymentImpl();
-			registerResources(deployment);
-			server.deploy(deployment);
-		}
+		logger.debug("Setting up undertow and resteasy...");
+		server = new UndertowJaxrsServer();
+		server.start(Undertow.builder().addHttpListener(8080, "localhost"));
+		ResteasyDeployment deployment = new ResteasyDeploymentImpl();
+		registerResources(deployment);
+		server.deploy(deployment);
 
 		return this;
 	}
@@ -66,9 +58,7 @@ public final class JakBeNimble {
 	}
 
 	public void stop() {
-		if (!this.noHttp) {
-			server.stop();
-		}
+		server.stop();
 		container.close();
 	}
 }
