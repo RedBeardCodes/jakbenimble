@@ -6,7 +6,7 @@ public record JakBeNimbleConfig(String host, int port, boolean devMode) {
 	public JakBeNimbleConfig {
 		Objects.nonNull(host);
 
-		if (port < 1 || port > 65535)
+		if (port < 0 || port > 65535)
 			throw new IllegalArgumentException("Invalid port: " + port);
 	}
 
