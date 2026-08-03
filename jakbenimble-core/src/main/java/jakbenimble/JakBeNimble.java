@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.ServiceLoader;
 import java.util.concurrent.CountDownLatch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
 import jakarta.enterprise.inject.spi.BeanManager;
@@ -14,6 +17,8 @@ public final class JakBeNimble {
 
 	private SeContainer container;
 	List<BootstrapExtension> extensions;
+
+	private final Logger logger = LoggerFactory.getLogger(JakBeNimble.class);
 
 	public static JakBeNimble start() {
 		JakBeNimble jbn = new JakBeNimble(SeContainerInitializer.newInstance());
@@ -34,12 +39,19 @@ public final class JakBeNimble {
 		container = initializer.initialize();
 		for (BootstrapExtension ext : extensions) {
 			BeanManager bm = container.getBeanManager();
+			long start = System.currentTimeMillis();
+			logger.info("Starting extension '{}'", ext.name());
 			ext.configure(bm);
+			long stop = System.currentTimeMillis();
+			logger.info("Started extension '{}' in {} ms", ext.name(), stop - start);
 		}
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			for (BootstrapExtension ext : extensions) {
+				long start = System.currentTimeMillis();
+				logger.info("Stopping extension '{}'", ext.name());
 				ext.destroy();
-				initializer.addBeanClasses(ext.getClass());
+				long stop = System.currentTimeMillis();
+				logger.info("Stopped extension '{}' in {} ms", ext.name(), stop - start);
 			}
 		}));
 		if (blockMainThread) {
