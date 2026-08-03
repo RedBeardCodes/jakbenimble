@@ -30,6 +30,8 @@
         <undertow.version>2.3.24.Final</undertow.version>
         <resteasy.version>7.0.2.Final</resteasy.version>
         <hikari.version>7.0.2</hikari.version>
+        <microprofile.version>3.1.1</microprofile.version>
+        <smallrye.version>3.18.0</smallrye.version>
 
         <!-- Logging -->
         <slf4j.version>2.0.17</slf4j.version>
@@ -48,12 +50,36 @@
                 <artifactId>jakbenimble-core</artifactId>
                 <version>${jbn.version}</version>
             </dependency>
+            <dependency>
+                <groupId>jakbenimble</groupId>
+                <artifactId>jakbenimble-spi</artifactId>
+                <version>${jbn.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakbenimble</groupId>
+                <artifactId>jakbenimble-web</artifactId>
+                <version>${jbn.version}</version>
+            </dependency>
 
             <!-- Jakarta -->
             <dependency>
                 <groupId>jakarta.platform</groupId>
                 <artifactId>jakarta.jakartaee-core-api</artifactId>
                 <version>${jakarta.version}</version>
+            </dependency>
+
+            <!-- MicroProfile -->
+            <dependency>
+                <groupId>org.eclipse.microprofile.config</groupId>
+                <artifactId>microprofile-config-api</artifactId>
+                <version>${microprofile.version}</version>
+            </dependency>
+
+            <!-- SmallRye -->
+            <dependency>
+                <groupId>io.smallrye.config</groupId>
+                <artifactId>smallrye-config</artifactId>
+                <version>${smallrye.version}</version>
             </dependency>
 
             <!-- SLF4J -->

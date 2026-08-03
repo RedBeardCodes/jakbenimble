@@ -1,63 +1,58 @@
 package jakbenimble;
 
-import org.jboss.resteasy.core.ResteasyDeploymentImpl;
-import org.jboss.resteasy.plugins.server.undertow.UndertowJaxrsServer;
-import org.jboss.resteasy.spi.ResteasyDeployment;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+import java.util.ServiceLoader;
+import java.util.concurrent.CountDownLatch;
 
-import io.undertow.Undertow;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
-import jakbenimble.cdi.RestDiscoveryExtension;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakbenimble.spi.BootstrapExtension;
 
 public final class JakBeNimble {
-	private final JakBeNimbleConfig config;
 	private final SeContainerInitializer initializer;
 
 	private SeContainer container;
-	private UndertowJaxrsServer server;
+	List<BootstrapExtension> extensions;
 
-	private static final Logger logger = LoggerFactory.getLogger(JakBeNimble.class);
-
-	public static JakBeNimble start(JakBeNimbleConfig config) {
-		JakBeNimble jbn = new JakBeNimble(config, SeContainerInitializer.newInstance());
-		jbn.doStart();
+	public static JakBeNimble start() {
+		JakBeNimble jbn = new JakBeNimble(SeContainerInitializer.newInstance());
+		jbn.doStart(true);
 		return jbn;
 	}
 
-	JakBeNimble(JakBeNimbleConfig config, SeContainerInitializer initializer) {
-		this.config = config;
+	JakBeNimble(SeContainerInitializer initializer) {
 		this.initializer = initializer;
 	}
 
-	void doStart() {
-		try {
-			logger.trace("Creating RestDiscoveryExtension...");
-			RestDiscoveryExtension ext = new RestDiscoveryExtension();
-			container = initializer.addExtensions(ext).initialize();
+	void doStart(boolean blockMainThread) {
 
-			logger.trace("Creating ResteasyDeployment...");
-			ResteasyDeployment deployment = new ResteasyDeploymentImpl();
-			deployment.getActualResourceClasses().addAll(ext.getResources());
-			deployment.getActualProviderClasses().addAll(ext.getProviders());
+		extensions = ServiceLoader.load(BootstrapExtension.class,
+				Thread.currentThread().getContextClassLoader()).stream()
+				.map(ServiceLoader.Provider::get).toList();
 
-			logger.trace("Creating UnderTowJaxRsServer...");
-			server = new UndertowJaxrsServer();
-			server.start(Undertow.builder().addHttpListener(config.port(), config.host()));
-
-			logger.trace("Deploying ResteasyDeployment to UndertowJaxRsServer...");
-			server.deploy(deployment);
-		} catch (Exception e) {
-			throw new RuntimeException("Failed to start JakBeNimble", e);
+		container = initializer.initialize();
+		for (BootstrapExtension ext : extensions) {
+			BeanManager bm = container.getBeanManager();
+			ext.configure(bm);
+		}
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			for (BootstrapExtension ext : extensions) {
+				ext.destroy();
+				initializer.addBeanClasses(ext.getClass());
+			}
+		}));
+		if (blockMainThread) {
+			CountDownLatch shutdown = new CountDownLatch(1);
+			try {
+				shutdown.await();
+			} catch (InterruptedException ie) {
+				Thread.currentThread().interrupt();
+			}
 		}
 	}
 
 	public void stop() {
-		if (server != null) {
-			server.stop();
-			server = null;
-		}
 		if (container != null) {
 			container.close();
 			container = null;

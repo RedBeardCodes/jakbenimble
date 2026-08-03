@@ -26,6 +26,10 @@
             <artifactId>jakbenimble-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>jakbenimble</groupId>
+            <artifactId>jakbenimble-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>

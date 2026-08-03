@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>jakbenimble</groupId>
-    <artifactId>jakbenimble-core</artifactId>
+    <artifactId>jakbenimble-web</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -24,6 +24,7 @@
             <groupId>jakbenimble</groupId>
             <artifactId>jakbenimble-spi</artifactId>
         </dependency>
+
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -36,6 +37,18 @@
             <artifactId>jakarta.jakartaee-core-api</artifactId>
         </dependency>
 
+        <!-- MicroProfile -->
+        <dependency>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+        </dependency>
+
+        <!-- SmallRye -->
+        <dependency>
+            <groupId>io.smallrye.config</groupId>
+            <artifactId>smallrye-config</artifactId>
+        </dependency>
+
         <!-- Weld SE -->
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
@@ -46,6 +59,23 @@
                     <artifactId>jboss-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- Undertow -->
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-core</artifactId>
+        </dependency>
+
+        <!-- RESTEasy -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-undertow</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-cdi</artifactId>
         </dependency>
 
         <!-- Testing -->
