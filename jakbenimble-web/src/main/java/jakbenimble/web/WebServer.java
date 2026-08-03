@@ -25,7 +25,6 @@ public class WebServer implements BootstrapExtension {
 
 	@Override
 	public void configure(BeanManager bm) {
-		logger.info("Creating web server extension...");
 		this.config = ConfigProvider.getConfig();
 
 		logger.trace("Creating RESTEasyDeployment...");
@@ -60,9 +59,13 @@ public class WebServer implements BootstrapExtension {
 	@Override
 	public void destroy() {
 		if (server != null) {
-			logger.info("Stopping web server");
+			server.stop();
 		}
-		logger.info("Web server stopped");
+	}
+
+	@Override
+	public String name() {
+		return "JakBeNimble Web Server";
 	}
 
 }
