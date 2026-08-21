@@ -13,6 +13,7 @@
         <module>jakbenimble-parent</module>
         <module>jakbenimble-spi</module>
         <module>jakbenimble-core</module>
+        <module>jakbenimble-data</module>
         <module>jakbenimble-web</module>
         <module>jakbenimble-testapp</module>
     </modules>
