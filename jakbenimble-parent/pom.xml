@@ -32,6 +32,7 @@
         <hikari.version>7.0.2</hikari.version>
         <microprofile.version>3.1.1</microprofile.version>
         <smallrye.version>3.18.0</smallrye.version>
+        <query4j.version>0.1.0-SNAPSHOT</query4j.version>
 
         <!-- Logging -->
         <slf4j.version>2.0.17</slf4j.version>
@@ -128,14 +129,6 @@
                 <version>3.6.1.Final</version>
             </dependency>
 
-            <!--
-            <dependency>
-                <groupId>io.undertow</groupId>
-                <artifactId>undertow-servlet</artifactId>
-                <version>${undertow.version}</version>
-            </dependency>
-            -->
-
             <!-- RESTEasy -->
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
@@ -154,6 +147,11 @@
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
                 <version>${hikari.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>query4j</groupId>
+                <artifactId>query4j</artifactId>
+                <version>${query4j.version}</version>
             </dependency>
 
             <!-- Testing -->
