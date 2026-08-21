@@ -15,8 +15,9 @@ import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.ext.Provider;
 import jakbenimble.spi.BootstrapExtension;
+import jakbenimble.spi.Configurable;
 
-public class WebServer implements BootstrapExtension {
+public class WebServer implements BootstrapExtension, Configurable {
 
 	Config config;
 	UndertowJaxrsServer server;
@@ -45,9 +46,9 @@ public class WebServer implements BootstrapExtension {
 
 		logger.trace("Creating UnderTowJaxRsServer...");
 		server = new UndertowJaxrsServer();
-		int port = config.getValue("http.port", Integer.class);
+		int port = config.getOptionalValue(namespace() + "http.port", Integer.class).orElse(8080);
 		logger.debug("Using port: " + port);
-		String host = config.getValue("http.host", String.class);
+		String host = config.getOptionalValue(namespace() + "http.host", String.class).orElse("0.0.0.0");
 		logger.debug("Using host: " + host);
 
 		logger.trace("Deploying ResteasyDeployment to UndertowJaxRsServer...");
@@ -66,6 +67,11 @@ public class WebServer implements BootstrapExtension {
 	@Override
 	public String name() {
 		return "JakBeNimble Web Server";
+	}
+
+	@Override
+	public String namespace() {
+		return "jbn.web.";
 	}
 
 }
