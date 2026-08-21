@@ -7,13 +7,13 @@
     <parent>
         <groupId>jakbenimble</groupId>
         <artifactId>jakbenimble-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.1.0-SNAPSHOT</version>
         <relativePath>../jakbenimble-parent</relativePath>
     </parent>
 
     <groupId>jakbenimble</groupId>
     <artifactId>jakbenimble-core</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>

@@ -6,7 +6,7 @@
 
     <groupId>jakbenimble</groupId>
     <artifactId>jakbenimble-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -22,7 +22,7 @@
         <surefire-plugin.version>3.5.4</surefire-plugin.version>
 
         <!-- JakBeNimble -->
-        <jbn.version>1.0.0-SNAPSHOT</jbn.version>
+        <jbn.version>0.1.0-SNAPSHOT</jbn.version>
 
         <!-- Dependencies -->
         <jakarta.version>11.0.0</jakarta.version>
