@@ -31,6 +31,8 @@ public final class JakBeNimble {
 	}
 
 	void doStart(boolean blockMainThread) {
+		long jbnStart = System.currentTimeMillis();
+		logger.info("Starting JakBeNimble");
 
 		extensions = ServiceLoader.load(BootstrapExtension.class,
 				Thread.currentThread().getContextClassLoader()).stream()
@@ -54,6 +56,8 @@ public final class JakBeNimble {
 				logger.info("Stopped extension '{}' in {} ms", ext.name(), stop - start);
 			}
 		}));
+		long jbnStop = System.currentTimeMillis();
+		logger.info("JakBeNimble started in {} ms", jbnStop - jbnStart);
 		if (blockMainThread) {
 			CountDownLatch shutdown = new CountDownLatch(1);
 			try {
