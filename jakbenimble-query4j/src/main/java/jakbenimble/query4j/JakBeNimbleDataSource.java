@@ -1,4 +1,4 @@
-package jakbenimble.data;
+package jakbenimble.query4j;
 
 import javax.sql.DataSource;
 
@@ -17,8 +17,11 @@ import query4j.Jdbc;
 @ApplicationScoped
 public class JakBeNimbleDataSource implements Configurable {
 
-	DataSource ds;
-	Config config;
+	private DataSource ds;
+	private Config config;
+	private Jdbc jdbc;
+
+	public JakBeNimbleDataSource() {}
 
 	@PostConstruct
 	public void init() {
@@ -29,12 +32,13 @@ public class JakBeNimbleDataSource implements Configurable {
 		hkConfig.setPassword(config.getValue(namespace() + "jdbc.pass", String.class));
 		hkConfig.setMaximumPoolSize(config.getOptionalValue(namespace() + "jdbc.pool_size", Integer.class).orElse(5));
 		ds = new HikariDataSource(hkConfig);
+		jdbc = new Jdbc(ds);
 	}
 
-	@Produces
 	@ApplicationScoped
+	@Produces
 	public Jdbc jdbc() {
-		return new Jdbc(ds);
+		return this.jdbc;
 	}
 
 	@Override

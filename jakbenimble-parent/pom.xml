@@ -61,6 +61,11 @@
                 <artifactId>jakbenimble-web</artifactId>
                 <version>${jbn.version}</version>
             </dependency>
+            <dependency>
+                <groupId>jakbenimble</groupId>
+                <artifactId>jakbenimble-query4j</artifactId>
+                <version>${jbn.version}</version>
+            </dependency>
 
             <!-- Jakarta -->
             <dependency>
@@ -139,6 +144,12 @@
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-cdi</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-json-binding-provider</artifactId>
                 <version>${resteasy.version}</version>
             </dependency>
 

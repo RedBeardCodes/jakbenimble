@@ -55,7 +55,7 @@ The project is organized into small modules rather than a single runtime depende
 
 - `jakbenimble-core` - core runtime and application bootstrap
 - `jakbenimble-spi` - extension and bootstrap interfaces
-- `jakbenimble-data` - data operations, utilizing [query4j](https://github.com/jakbenimble-project/query4j)
+- `jakbenimble-query4j` - integration module for [query4j](https://github.com/jakbenimble-project/query4j)
 - `jakbenimble-web` - HTTP/web integration
 - `jakbenimble-testapp` - test application used during development
 
