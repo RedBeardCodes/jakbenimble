@@ -17,10 +17,11 @@
     <packaging>jar</packaging>
 
     <properties>
+        <sqlite.version>3.53.2.1</sqlite.version>
     </properties>
 
     <dependencies>
-        <!-- Jakarta -->
+        <!-- JakBeNimble -->
         <dependency>
             <groupId>jakbenimble</groupId>
             <artifactId>jakbenimble-core</artifactId>
@@ -29,6 +30,26 @@
             <groupId>jakbenimble</groupId>
             <artifactId>jakbenimble-web</artifactId>
         </dependency>
+
+        <!-- Query4J integration -->
+        <dependency>
+            <groupId>jakbenimble</groupId>
+            <artifactId>jakbenimble-query4j</artifactId>
+        </dependency>
+        <!-- Query4J *must* be included as a dependency. jakbenimble-query4j only provides integration assistance with CDI. -->
+        <dependency>
+            <groupId>query4j</groupId>
+            <artifactId>query4j</artifactId>
+        </dependency>
+
+        <!-- SQLite -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>${sqlite.version}</version>
+        </dependency>
+
+        <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
