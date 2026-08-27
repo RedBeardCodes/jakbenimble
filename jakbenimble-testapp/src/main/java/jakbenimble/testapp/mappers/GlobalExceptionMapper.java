@@ -69,5 +69,5 @@ public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
 		return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 	}
 
-	public record ApiError(String tackingId, String message) {}
+	public record ApiError(String trackingId, String message) {}
 }
