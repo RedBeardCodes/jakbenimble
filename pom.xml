@@ -11,6 +11,7 @@
 
     <modules>
         <module>jakbenimble-parent</module>
+        <module>jakbenimble-bom</module>
         <module>jakbenimble-spi</module>
         <module>jakbenimble-core</module>
         <module>jakbenimble-query4j</module>

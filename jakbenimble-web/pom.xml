@@ -13,11 +13,24 @@
 
     <groupId>jakbenimble</groupId>
     <artifactId>jakbenimble-web</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
+        <jbn.version>0.1.0-SNAPSHOT</jbn.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>jakbenimble</groupId>
+                <artifactId>jakbenimble-bom</artifactId>
+                <version>${jbn.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
     <dependencies>
         <dependency>

@@ -20,195 +20,37 @@
         <dependency-plugin.version>3.10.0</dependency-plugin.version>
         <compiler-plugin.version>3.15.0</compiler-plugin.version>
         <surefire-plugin.version>3.5.4</surefire-plugin.version>
-
-        <!-- JakBeNimble -->
-        <jbn.version>0.1.0-SNAPSHOT</jbn.version>
-
-        <!-- Dependencies -->
-        <jakarta.version>11.0.0</jakarta.version>
-        <weld.version>6.0.4.Final</weld.version>
-        <undertow.version>2.3.24.Final</undertow.version>
-        <resteasy.version>7.0.2.Final</resteasy.version>
-        <hikari.version>7.0.2</hikari.version>
-        <microprofile.version>3.1.1</microprofile.version>
-        <smallrye.version>3.18.0</smallrye.version>
-        <query4j.version>0.1.0-SNAPSHOT</query4j.version>
-
-        <!-- Logging -->
-        <slf4j.version>2.0.17</slf4j.version>
-        <logback.version>1.5.32</logback.version>
-
-        <!-- Testing -->
-        <junit.version>6.1.0</junit.version>
-        <mockito.version>5.23.0</mockito.version>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- JakBeNimble -->
-            <dependency>
-                <groupId>jakbenimble</groupId>
-                <artifactId>jakbenimble-core</artifactId>
-                <version>${jbn.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jakbenimble</groupId>
-                <artifactId>jakbenimble-spi</artifactId>
-                <version>${jbn.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jakbenimble</groupId>
-                <artifactId>jakbenimble-web</artifactId>
-                <version>${jbn.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>jakbenimble</groupId>
-                <artifactId>jakbenimble-query4j</artifactId>
-                <version>${jbn.version}</version>
-            </dependency>
-
-            <!-- Jakarta -->
-            <dependency>
-                <groupId>jakarta.platform</groupId>
-                <artifactId>jakarta.jakartaee-core-api</artifactId>
-                <version>${jakarta.version}</version>
-            </dependency>
-
-            <!-- MicroProfile -->
-            <dependency>
-                <groupId>org.eclipse.microprofile.config</groupId>
-                <artifactId>microprofile-config-api</artifactId>
-                <version>${microprofile.version}</version>
-            </dependency>
-
-            <!-- SmallRye -->
-            <dependency>
-                <groupId>io.smallrye.config</groupId>
-                <artifactId>smallrye-config</artifactId>
-                <version>${smallrye.version}</version>
-            </dependency>
-
-            <!-- SLF4J -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>jul-to-slf4j</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
-            <!-- Logback -->
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback.version}</version>
-            </dependency>
-
-            <!-- Weld SE -->
-            <dependency>
-                <groupId>org.jboss.weld.se</groupId>
-                <artifactId>weld-se-core</artifactId>
-                <version>${weld.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.jboss.logging</groupId>
-                        <artifactId>jboss-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <!-- Undertow -->
-            <dependency>
-                <groupId>io.undertow</groupId>
-                <artifactId>undertow-core</artifactId>
-                <version>${undertow.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.logging</groupId>
-                <artifactId>jboss-logging</artifactId>
-                <version>3.6.1.Final</version>
-            </dependency>
-
-            <!-- RESTEasy -->
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-undertow</artifactId>
-                <version>${resteasy.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-cdi</artifactId>
-                <version>${resteasy.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-json-binding-provider</artifactId>
-                <version>${resteasy.version}</version>
-            </dependency>
-
-            <!-- JDBC / Pooling -->
-            <dependency>
-                <groupId>com.zaxxer</groupId>
-                <artifactId>HikariCP</artifactId>
-                <version>${hikari.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>query4j</groupId>
-                <artifactId>query4j</artifactId>
-                <version>${query4j.version}</version>
-            </dependency>
-
-            <!-- Testing -->
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito.version}</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${compiler-plugin.version}</version>
-                <configuration>
-                    <source>${maven.compiler.release}</source>
-                    <target>${maven.compiler.release}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${jar-plugin.version}</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>${dependency-plugin.version}</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire-plugin.version}</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${surefire-plugin.version}</version>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.release}</source>
+                        <target>${maven.compiler.release}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${jar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${dependency-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${surefire-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>
