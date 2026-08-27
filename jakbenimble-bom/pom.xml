@@ -16,11 +16,12 @@
         <!-- Dependencies -->
         <jakarta.version>11.0.0</jakarta.version>
         <weld.version>6.0.4.Final</weld.version>
+        <jboss-logging.version>3.6.3.Final</jboss-logging.version>
         <undertow.version>2.3.24.Final</undertow.version>
         <resteasy.version>7.0.2.Final</resteasy.version>
         <hikari.version>7.0.2</hikari.version>
         <microprofile.version>7.1</microprofile.version>
-        <smallrye.version>3.3.0</smallrye.version>
+        <smallrye-config.version>3.18.2</smallrye-config.version>
         <query4j.version>0.1.0-SNAPSHOT</query4j.version>
 
         <!-- Logging -->
@@ -77,9 +78,9 @@
 
             <!-- SmallRye -->
             <dependency>
-                <groupId>io.smallrye</groupId>
-                <artifactId>smallrye-bom</artifactId>
-                <version>${smallrye.version}</version>
+                <groupId>io.smallrye.config</groupId>
+                <artifactId>smallrye-config-bom</artifactId>
+                <version>${smallrye-config.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -100,6 +101,11 @@
                 <version>${weld.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+                <version>${jboss-logging.version}</version>
             </dependency>
 
             <!-- Undertow -->
