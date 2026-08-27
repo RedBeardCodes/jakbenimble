@@ -14,8 +14,8 @@ public record UserResponse(Long id, String firstName, String lastName, String em
 				rs.getString("first_name"),
 				rs.getString("last_name"),
 				rs.getString("email"),
-				rs.getObject("created_at", Instant.class),
-				rs.getObject("updated_at", Instant.class),
+				Instant.ofEpochSecond(rs.getLong("created_at")),
+				Instant.ofEpochSecond(rs.getLong("updated_at")),
 				rs.getInt("is_active") == 1
 				);
 	};

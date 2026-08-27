@@ -40,7 +40,7 @@ public class UserResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addNewUser(User user) throws QueryException {
 		String sql = "insert into users (first_name, last_name, email, created_at, updated_at) values (?, ?, ?, ?, ?)";
-		Integer id = jdbc.insert(sql, Integer.class, user.firstName(), user.lastName(), user.email(), Instant.now(), Instant.now());
+		Integer id = jdbc.insert(sql, Integer.class, user.firstName(), user.lastName(), user.email(), Instant.now().getEpochSecond(), Instant.now().getEpochSecond());
 		return Response.status(Status.CREATED).entity(id).build();
 	}
 
