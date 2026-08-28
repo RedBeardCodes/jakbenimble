@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.undertow.Undertow;
+import io.undertow.server.handlers.resource.ClassPathResourceManager;
+import io.undertow.server.handlers.resource.ResourceHandler;
 import jakarta.enterprise.inject.spi.AnnotatedType;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.BeanManager;
@@ -54,7 +56,25 @@ public class WebServer implements BootstrapExtension, Configurable {
 		logger.trace("Deploying ResteasyDeployment to UndertowJaxRsServer...");
 
 		server.deploy(deployment);
+
+		boolean enableStatic = config.getOptionalValue(namespace() + "enable_static", Boolean.class).orElse(false);
+
+		if (enableStatic) {
+			logger.debug("Enabling static resources");
+			addClasspathResource("/css", "css");
+			addClasspathResource("/js", "js");
+			addClasspathResource("/img", "img");
+		}
+
 		server.start(Undertow.builder().addListener(port, host));
+	}
+
+	private void addClasspathResource(String path, String resourcePath) {
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		ClassPathResourceManager manager = new ClassPathResourceManager(classLoader, resourcePath);
+		ResourceHandler handler = new ResourceHandler(manager);
+		server.addResourcePrefixPath(path, handler);
+		logger.info("Serving classpath resource '{}' at '{}'", resourcePath, path);
 	}
 
 	@Override
