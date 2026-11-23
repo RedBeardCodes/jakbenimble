@@ -8,10 +8,9 @@
         <groupId>jakbenimble</groupId>
         <artifactId>jakbenimble-parent</artifactId>
         <version>0.1.0-SNAPSHOT</version>
-        <relativePath>../jakbenimble-parent</relativePath>
+        <relativePath>../jakbenimble-parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>jakbenimble</groupId>
     <artifactId>jakbenimble-query4j</artifactId>
     <packaging>jar</packaging>
 
@@ -23,16 +22,12 @@
         </license>
     </licenses>
 
-    <properties>
-        <jbn.version>0.1.0-SNAPSHOT</jbn.version>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>jakbenimble</groupId>
                 <artifactId>jakbenimble-bom</artifactId>
-                <version>${jbn.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
